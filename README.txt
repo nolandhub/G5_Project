@@ -1,4 +1,4 @@
-Comand run project : 
+Command run project : 
 note:
 
 ******************************************************
