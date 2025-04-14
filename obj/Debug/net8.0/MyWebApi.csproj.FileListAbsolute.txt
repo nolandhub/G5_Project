@@ -149,3 +149,5 @@ C:\Users\Do Nhan\Desktop\Nhom5_WebAPI\MyWebApi\obj\Debug\net8.0\refint\MyWebApi.
 C:\Users\Do Nhan\Desktop\Nhom5_WebAPI\MyWebApi\obj\Debug\net8.0\MyWebApi.pdb
 C:\Users\Do Nhan\Desktop\Nhom5_WebAPI\MyWebApi\obj\Debug\net8.0\MyWebApi.genruntimeconfig.cache
 C:\Users\Do Nhan\Desktop\Nhom5_WebAPI\MyWebApi\obj\Debug\net8.0\ref\MyWebApi.dll
+C:\Users\Do Nhan\Desktop\Nhom5_WebAPI\MyWebApi\obj\Debug\net8.0\MyWebApi.sourcelink.json
+C:\Users\Do Nhan\Desktop\Nhom5_WebAPI\MyWebApi\bin\Debug\net8.0\Dapper.dll

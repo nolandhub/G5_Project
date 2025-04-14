@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "/iPjMqgl9hE=",
+  "dgSpecHash": "kafZmBSskrU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Do Nhan\\Desktop\\Nhom5_WebAPI\\MyWebApi\\MyWebApi.csproj",
+  "projectFilePath": "D:\\Learn\\Nhom5_WebAPI\\MyWebApi\\MyWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Do Nhan\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Do Nhan\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\Do Nhan\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\Do Nhan\\.nuget\\packages\\firebaseadmin\\3.1.0\\firebaseadmin.3.1.0.nupkg.sha512",
     "C:\\Users\\Do Nhan\\.nuget\\packages\\firebaseauthentication.net\\4.1.0\\firebaseauthentication.net.4.1.0.nupkg.sha512",
     "C:\\Users\\Do Nhan\\.nuget\\packages\\google.api.gax\\4.8.0\\google.api.gax.4.8.0.nupkg.sha512",
