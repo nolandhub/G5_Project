@@ -7,9 +7,10 @@ namespace MyWebApi.Dtos.TaiKhoan
 {
     public class LoginResponeDTO
     {
+        public int MaTK { get; set; }
         public string TenHienThi { get; set; }
-        public string? token { get; set; }
-        public int expireIn { get; set; }
+        public string Token { get; set; }
+        public int ExpireIn { get; set; }
 
     }
 }

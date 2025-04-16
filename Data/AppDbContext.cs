@@ -13,7 +13,7 @@ namespace webAPI.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<TaiKhoan> TaiKhoans { get; set; }
+        public DbSet<TaiKhoan> TaiKhoans { get; set; }  
         public DbSet<VaiTro> VaiTros { get; set; }
 
         public DbSet<NhanVien> NhanViens { get; set; }
@@ -27,10 +27,28 @@ namespace webAPI.Data
         public DbSet<Phong> Phongs { get; set; }
 
         public DbSet<KhachHang> KhachHangs { get; set; }
+
         public DbSet<TrangThaiDatPhong> TrangThaiDatPhongs { get; set; }
+
         public DbSet<DatPhong> DatPhongs { get; set; }
 
+        public DbSet<TrangThaiPhong> TrangThaiPhongs { get; set; }
 
+        public DbSet<DichVu> DichVus { get; set; }
+
+        public DbSet<SuDungDichVu> SuDungDichVus { get; set; }
+
+        public DbSet<HoaDon> HoaDons { get; set; }
+
+        public DbSet<ChiTietHoaDonDV> ChiTietHoaDonDVs { get; set; }
+
+        public DbSet<HinhAnhPhong> HinhAnhPhongs { get; set; }
+
+        public DbSet<PhuongThucThanhToan> PhuongThucThanhToans { get; set; }
+
+        public DbSet<TrangThaiThanhToan> TrangThaiThanhToans { get; set; }
+
+        public DbSet<GiamGia> GiamGias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
