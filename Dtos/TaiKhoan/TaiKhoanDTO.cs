@@ -13,7 +13,6 @@ namespace MyWebApi.Dtos.TaiKhoan
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public bool? IsVerified { get; set; }
-
         public DateTime CreateAt { get; set; }
 
     }
