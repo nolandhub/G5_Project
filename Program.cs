@@ -12,6 +12,9 @@ using Microsoft.Extensions.Options;
 using MyWebApi.Interfaces.IRepositories;
 using MyWebApi.Repositories;
 using AutoMapper;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -113,21 +116,16 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 
 // Development environment configuration
-// if (app.Environment.IsDevelopment())
-// {
-
-// }
-app.UseSwagger();
-app.UseSwaggerUI();
-
-
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 // Security and routing middleware
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.Urls.Add("http://*:80");
 
 // Endpoints
 app.MapControllers();
@@ -136,3 +134,20 @@ app.MapControllers();
 // RUN APPLICATION
 // ========================
 app.Run();
+
+// Configure Data Protection to use environment variables
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo("/tmp/keys"))
+    .SetApplicationName("MyWebApi")
+    .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration
+    {
+        EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+        ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+    });
+
+// Configure HTTPS redirection
+builder.Services.AddHttpsRedirection(options =>
+{
+    // Render.com handles HTTPS termination, so we don't need to specify a port
+    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+});
