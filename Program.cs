@@ -26,6 +26,19 @@ builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpContextAccessor();
 
+// Add CORS configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 // ========================
 // SWAGGER CONFIGURATION
 // ========================
@@ -115,11 +128,28 @@ var app = builder.Build();
 // Exception handling - should be first in pipeline
 app.UseMiddleware<ExceptionMiddleware>();
 
+// Enable CORS
+app.UseCors("AllowAll");
+
 // Development environment configuration
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Web API v1");
+        c.RoutePrefix = string.Empty;
+    });
+}
+else
+{
+    // In production, always use Swagger
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Web API v1");
+        c.RoutePrefix = string.Empty; // Serve Swagger UI at the root URL
+    });
 }
 
 // Security and routing middleware
