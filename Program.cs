@@ -119,10 +119,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 // Security and routing middleware
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.Urls.Add("http://*:80");
 
 // Endpoints
 app.MapControllers();
