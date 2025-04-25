@@ -14,18 +14,17 @@ namespace MyWebApi.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly AppDbContext _context;
+
         private readonly IAuthService _authservice;
-        public AuthController(AppDbContext context, IAuthService authservice)
+        public AuthController(IAuthService authservice)
         {
-            _context = context;
             _authservice = authservice;
         }
 
 
         [HttpPost("Register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromForm] RegisterDTO regis)
+        public async Task<IActionResult> Register(RegisterDTO regis)
         {
             var result = await _authservice.Register(regis);
             return StatusCode(result.StatusCode, result);
@@ -34,7 +33,7 @@ namespace MyWebApi.Controllers
 
         [HttpPost("Login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromForm] LoginDTO log)
+        public async Task<IActionResult> Login(LoginDTO log)
         {
 
             if (string.IsNullOrEmpty(log.TenTK) || string.IsNullOrEmpty(log.MatKhau))
@@ -47,12 +46,10 @@ namespace MyWebApi.Controllers
         }
 
 
-
         [HttpPost("Test")]
-        [Authorize]
+        [Authorize(Roles = "1,2")]
         public async Task<IActionResult> Test()
         {
-
             return Ok("Api Work");
         }
 

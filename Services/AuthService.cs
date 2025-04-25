@@ -30,82 +30,95 @@ namespace MyWebApi.Services
 
         public async Task<ResultDTO> Login(LoginDTO log)
         {
-            var user = await _context.TaiKhoans.FirstOrDefaultAsync(c => c.TenTK == log.TenTK);
-            if (user == null || !PasswordHasher.Verify(user.MatKhau, log.MatKhau))
+            try
+            {
+                var user = await _context.TaiKhoans.FirstOrDefaultAsync(c => c.TenTK == log.TenTK);
+                if (user == null || !PasswordHasher.Verify(user.MatKhau, log.MatKhau))
+                {
+                    return new ResultDTO
+                    {
+                        Success = false,
+                        Message = "Tên Đăng nhập hoặc mật khẩu không chính xác ",
+                        StatusCode = 401
+                    };
+                }
+
+                // loginResponse Chứa id,Tên hiển thị , Token,ExpireIn do bên jwt đã trả về trong "Authenticate"
+                var loginResponse = _jwtAuthToken.Authenticate(user);
+
+                return new ResultDTO
+                {
+                    Success = true,
+                    Message = "Đăng nhập thành công",
+                    StatusCode = 200,
+                    Data = loginResponse
+                };
+            }
+            catch (Exception ex)
             {
                 return new ResultDTO
                 {
                     Success = false,
-                    Message = "Tên Đăng nhập hoặc mật khẩu không chính xác ",
-                    StatusCode = 401
+                    Message = $"Lỗi khi đăng nhập: {ex.Message}",
+                    StatusCode = 500
                 };
-
             }
-
-            // loginResponse Chứa id,Tên hiển thị , Token do bên jwt đã trả về trong "Authenticate"
-            var loginResponse = _jwtAuthToken.Authenticate(user);
-
-            return new ResultDTO
-            {
-                Success = true,
-                Message = "Đăng nhập thành công",
-                StatusCode = 200,
-                Data = loginResponse
-            };
-
         }
 
         public async Task<ResultDTO> Register(RegisterDTO regis)
         {
-            var hashPash = PasswordHasher.Hash(regis.MatKhau);
+            try
+            {
+                var hashPash = PasswordHasher.Hash(regis.MatKhau);
 
-            var existingAccount = await _context.TaiKhoans
-                .Where(t => t.TenTK == regis.TenTK || t.TenHienThi == regis.TenHienThi)
-                .ToListAsync();
+                var existingAccount = await _context.TaiKhoans
+                    .Where(t => t.TenTK == regis.TenTK || t.TenHienThi == regis.TenHienThi)
+                    .ToListAsync();
 
-            if (existingAccount.Any(t => t.TenTK == regis.TenTK))
+                if (existingAccount.Any(t => t.TenTK == regis.TenTK))
+                {
+                    return new ResultDTO
+                    {
+                        Success = false,
+                        Message = "Tên tài khoản đã tồn tại.",
+                        StatusCode = 400  // Bad Request
+                    };
+                }
+
+
+                var user = new TaiKhoan
+                {
+                    TenTK = regis.TenTK,
+                    MatKhau = hashPash,
+                    TenHienThi = regis.TenHienThi,
+                    Email = regis.Email,
+                    Phone = regis.Phone,
+                    IsVerified = false,
+                    Xoa = false,
+                    LoaiTK = 3,
+                    CreateAt = DateTime.Now,
+                };
+
+                await _context.TaiKhoans.AddAsync(user);
+                await _context.SaveChangesAsync();
+
+                return new ResultDTO
+                {
+                    Success = true,
+                    Message = "Đăng ký thành công",
+                    StatusCode = 201,
+                    Data = new { user.TenTK, user.TenHienThi, user.Email, user.Phone },
+                };
+            }
+            catch (Exception ex)
             {
                 return new ResultDTO
                 {
                     Success = false,
-                    Message = "Tên tài khoản đã tồn tại.",
-                    StatusCode = 400  // Bad Request
+                    Message = $"Lỗi khi đăng ký tài khoản: {ex.Message}",
+                    StatusCode = 500
                 };
             }
-            if (existingAccount.Any(t => t.TenHienThi == regis.TenHienThi))
-            {
-                return new ResultDTO
-                {
-                    Success = false,
-                    Message = "Tên hiển thị đã tồn tại.",
-                    StatusCode = 400  // Bad Request
-                };
-            }
-
-
-            var user = new TaiKhoan
-            {
-                TenTK = regis.TenTK,
-                MatKhau = hashPash,
-                TenHienThi = regis.TenHienThi,
-                Email = regis.Email,
-                Phone = regis.Phone,
-                IsVerified = false,
-                Xoa = false,
-                LoaiTK = 3,
-                CreateAt = DateTime.Now,
-            };
-
-            await _context.TaiKhoans.AddAsync(user);
-            await _context.SaveChangesAsync();
-
-            return new ResultDTO
-            {
-                Success = true,
-                Message = "Đăng ký thành công",
-                StatusCode = 201,
-                Data = new { user.TenTK, user.TenHienThi, user.Email, user.Phone },
-            };
         }
     }
 }

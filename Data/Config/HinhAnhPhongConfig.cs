@@ -20,9 +20,6 @@ namespace MyWebApi.Data.Config
                 .HasColumnType("varchar(max)");
 
 
-
-
-
             builder.HasOne(h => h.Phong)
                 .WithMany(p => p.HinhAnhPhongs)
                 .HasForeignKey(h => h.MaPhong);
