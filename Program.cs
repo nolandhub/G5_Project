@@ -113,11 +113,12 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 
 // Development environment configuration
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// if (app.Environment.IsDevelopment())
+// {
+
+// }
+app.UseSwagger();
+app.UseSwaggerUI();
 
 
 
