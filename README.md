@@ -2,8 +2,8 @@ Command run project :
 note:
 
 ******************************************************
-//                                                  //
-//                  cd MyWebApi                     //
-//                  dotnet watch run                //
-//                                                  //
+                                                
+                  cd MyWebApi                     
+                  dotnet watch run                
+                                                 
 ******************************************************
