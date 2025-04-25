@@ -26,10 +26,6 @@ namespace MyWebApi.Data.Config
             builder.Property(p => p.MoTa)
                 .HasMaxLength(200);
 
-
-
-
-
             builder.HasOne(p => p.TrangThaiPhong)
                 .WithMany(ttp => ttp.Phongs)
                 .HasForeignKey(p => p.TrangThai);

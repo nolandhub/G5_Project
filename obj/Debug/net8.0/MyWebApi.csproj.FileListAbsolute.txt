@@ -304,3 +304,5 @@ D:\Learn\Nhom5_WebAPI\MyWebApi\obj\Debug\net8.0\refint\MyWebApi.dll
 D:\Learn\Nhom5_WebAPI\MyWebApi\obj\Debug\net8.0\MyWebApi.pdb
 D:\Learn\Nhom5_WebAPI\MyWebApi\obj\Debug\net8.0\MyWebApi.genruntimeconfig.cache
 D:\Learn\Nhom5_WebAPI\MyWebApi\obj\Debug\net8.0\ref\MyWebApi.dll
+D:\Learn\Nhom5_WebAPI\MyWebApi\bin\Debug\net8.0\AutoMapper.dll
+D:\Learn\Nhom5_WebAPI\MyWebApi\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

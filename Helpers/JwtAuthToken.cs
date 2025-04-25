@@ -41,7 +41,7 @@ namespace MyWebApi.Helpers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                    new Claim(JwtRegisteredClaimNames.NameId, user.MaTK.ToString()),
-                   new Claim("TenHienThi", user.TenHienThi ),
+                   new Claim(JwtRegisteredClaimNames.GivenName, user.TenHienThi ),
                    new Claim(ClaimTypes.Role, user.LoaiTK.ToString())
 
                 }),

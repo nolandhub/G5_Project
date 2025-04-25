@@ -97,7 +97,7 @@ namespace MyWebApi.Middleware
                 var result = new ResultDTO
                 {
                     Success = false,
-                    Message = "Đã xảy ra lỗi hệ thống, vui lòng thử lại sau.",
+                    Message = ex.Message,
                     StatusCode = 500
                 };
                 var json = JsonSerializer.Serialize(result);

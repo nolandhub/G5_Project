@@ -13,7 +13,7 @@ namespace webAPI.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<TaiKhoan> TaiKhoans { get; set; }  
+        public DbSet<TaiKhoan> TaiKhoans { get; set; }
         public DbSet<VaiTro> VaiTros { get; set; }
 
         public DbSet<NhanVien> NhanViens { get; set; }
