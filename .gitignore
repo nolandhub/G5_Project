@@ -1,0 +1,14 @@
+# Ignore bin và obj thư mục trong dự án .NET
+bin/
+obj/
+
+# Ignore thư mục của IDE
+.vscode/
+.idea/
+
+# Ignore file log
+*.log
+
+# Ignore file hệ thống
+Thumbs.db
+.DS_Store

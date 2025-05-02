@@ -120,18 +120,13 @@ namespace MyWebApi.Controllers
 
 
         [Authorize(Roles = "1")]  // 1: Admin
-        [HttpDelete("DeleteUserById")]
+        [HttpDelete("DeleteById")]
         public async Task<IActionResult> DeleteUserById(int Id)
         {
             var result = await _taikhoanrepo.DeleteById(Id);
 
             return StatusCode(result.StatusCode, result);
         }
-
-
-
-
-
 
 
 
