@@ -63,5 +63,36 @@ namespace MyWebApi.Helpers
                 ExpireIn = (int)tokenExpiryTimeStamp.Subtract(DateTime.UtcNow).TotalSeconds
             };
         }
+
+
+
+        public string GenerateVerificationToken(string email)
+        {
+            var issuer = _configuration["JwtConfig:Issuer"];
+            var audience = _configuration["JwtConfig:Audience"];
+            var key = _configuration["JwtConfig:Key"];
+            var tokenValidityMins = _configuration.GetValue<int>("JwtConfig:TokenValidityMins");
+            var tokenExpiryTimeStamp = DateTime.UtcNow.AddMinutes(tokenValidityMins);
+
+
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Email, email)
+            };
+
+
+            var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+            var creds = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                expires: tokenExpiryTimeStamp,
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
 }

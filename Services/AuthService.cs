@@ -19,10 +19,16 @@ namespace MyWebApi.Services
 
         private readonly JwtAuthToken _jwtAuthToken;
 
-        public AuthService(AppDbContext context, JwtAuthToken jwtAuthToken)
+        private readonly IEmailService _emailService;
+
+
+
+
+        public AuthService(AppDbContext context, JwtAuthToken jwtAuthToken, IEmailService emailService)
         {
             _context = context;
             _jwtAuthToken = jwtAuthToken;
+            _emailService = emailService;
         }
 
 
@@ -102,10 +108,31 @@ namespace MyWebApi.Services
                 await _context.TaiKhoans.AddAsync(user);
                 await _context.SaveChangesAsync();
 
+
+
+                var token = _jwtAuthToken.GenerateVerificationToken(regis.Email);
+                var linkVerify = $"https://g5-project.onrender.com/api/Auth/VerifyEmail?token={token}";
+
+
+                var sendInfo = new EmailForm
+                {
+                    ToEmail = regis.Email,
+                    ToName = regis.TenHienThi,
+                    Subject = "Xác thực email",
+                    PlainText = "",
+                    HtmlContent = "",
+                    VerificationLink = linkVerify,
+                };
+
+                await _emailService.SendVerification(sendInfo);
+
+
+
+
                 return new ResultDTO
                 {
                     Success = true,
-                    Message = "Đăng ký thành công",
+                    Message = "Đăng ký thành công, kiểm tra email đã kích hoạt tài khoản",
                     StatusCode = 201,
                     Data = new { user.TenTK, user.TenHienThi, user.Email, user.Phone },
                 };

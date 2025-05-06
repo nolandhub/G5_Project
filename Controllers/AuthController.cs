@@ -16,9 +16,12 @@ namespace MyWebApi.Controllers
     {
 
         private readonly IAuthService _authservice;
-        public AuthController(IAuthService authservice)
+
+        private readonly IEmailService _emailService;
+        public AuthController(IAuthService authservice, IEmailService emailService)
         {
             _authservice = authservice;
+            _emailService = emailService;
         }
 
 
@@ -46,12 +49,24 @@ namespace MyWebApi.Controllers
         }
 
 
-        [HttpPost("Test")]
-        [Authorize(Roles = "1,2")]
-        public async Task<IActionResult> Test()
+
+        [HttpPost("Sendverify")]
+        [AllowAnonymous]
+        public async Task<IActionResult> SendVerify(EmailForm info)
         {
-            return Ok("Api Work");
+            var result = await _emailService.SendVerification(info);
+            return StatusCode(result.StatusCode, result);
         }
+
+
+        [HttpPost("VerifyEmail")]
+        [AllowAnonymous]
+        public async Task<IActionResult> VerifyEmail([FromQuery] string token)
+        {
+            var result = await _emailService.VerifyEmail(token);
+            return StatusCode(result.StatusCode, result);
+        }
+
 
     }
 }

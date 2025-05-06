@@ -34,7 +34,6 @@ namespace MyWebApi.Repositories
         {
             try
             {
-
                 var currentUser = _httpContextAccessor.HttpContext.User;
                 if (!currentUser.IsInRole("1"))
                 {

@@ -43,6 +43,7 @@ namespace MyWebApi.Data.Config
                             .HasColumnType("bit");
 
 
+
                      builder.Property(t => t.Xoa)
                             .HasColumnType("bit");
 
