@@ -35,7 +35,7 @@ namespace MyWebApi.Services
         public async Task<ResultDTO> SendVerification(EmailForm info)
         {
 
-            var apiKey = _configuration["SendGrid:ApiKey"] ?? Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY") ?? _configuration["SendGrid:ApiKey"];
             var senderEmail = _configuration["SendGrid:FromEmail"];
             var senderName = _configuration["SendGrid:FromName"];
 
