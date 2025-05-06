@@ -42,7 +42,7 @@ namespace MyWebApi.Services
             try
             {
 
-                string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "authEmail.html");
+                string templatePath = Path.Combine(_environment.ContentRootPath, "Templates", "authEmail.html");
                 string htmlTemplate = await File.ReadAllTextAsync(templatePath);
 
                 htmlTemplate = htmlTemplate.Replace("{{UserName}}", info.ToName);
