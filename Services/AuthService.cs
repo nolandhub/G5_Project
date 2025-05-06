@@ -127,8 +127,6 @@ namespace MyWebApi.Services
                 await _emailService.SendVerification(sendInfo);
 
 
-
-
                 return new ResultDTO
                 {
                     Success = true,
