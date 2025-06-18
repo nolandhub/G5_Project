@@ -59,12 +59,20 @@ namespace MyWebApi.Controllers
         }
 
 
-        [HttpPost("VerifyEmail")]
+        [HttpGet("VerifyEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> VerifyEmail([FromQuery] string token)
         {
             var result = await _emailService.VerifyEmail(token);
-            return StatusCode(result.StatusCode, result);
+
+            if (result.Success)
+            {
+                return Content("<h2>Xác thực email thành công!</h2><p>Bây giờ bạn có thể đăng nhập.</p>", "text/html");
+            }
+            else
+            {
+                return Content($"<h2>Xác thực thất bại!</h2><p>{result.Message}</p>", "text/html");
+            }
         }
 
 
