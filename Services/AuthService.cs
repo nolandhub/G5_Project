@@ -119,8 +119,8 @@ namespace MyWebApi.Services
                     ToEmail = regis.Email,
                     ToName = regis.TenHienThi,
                     Subject = "Xác thực email",
-                    PlainText = "",
-                    HtmlContent = "",
+                    PlainText = $"Xin chào {regis.TenHienThi}, vui lòng xác thực tài khoản bằng cách nhấp vào link: {linkVerify}",
+                    HtmlContent = $"<p>Xin chào {regis.TenHienThi},</p><p>Vui lòng xác thực tài khoản bằng cách nhấp vào liên kết dưới đây:</p><a href='{linkVerify}'>Xác thực tài khoản</a>",
                     VerificationLink = linkVerify,
                 };
 
