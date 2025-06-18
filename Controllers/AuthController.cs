@@ -67,11 +67,17 @@ namespace MyWebApi.Controllers
 
             if (result.Success)
             {
-                return Content("<h2>Xác thực email thành công!</h2><p>Bây giờ bạn có thể đăng nhập.</p>", "text/html");
+                return Content(
+    "<html><head><meta charset='UTF-8'></head><body><h1>Xác thực email thành công!</h1><p>Bây giờ bạn có thể đăng nhập.</p></body></html>",
+    "text/html", System.Text.Encoding.UTF8
+);
+
+
             }
             else
             {
-                return Content($"<h2>Xác thực thất bại!</h2><p>{result.Message}</p>", "text/html");
+                return Content("<html><head><meta charset='UTF-8'></head><body><h1>Xác thực email thất bại!</h1><p>Hãy thử lại!</p></body></html>",
+    "text/html", System.Text.Encoding.UTF8);
             }
         }
 
