@@ -130,7 +130,7 @@ namespace MyWebApi.Services
                 return new ResultDTO
                 {
                     Success = true,
-                    Message = "Đăng ký thành công, kiểm tra email đã kích hoạt tài khoản",
+                    Message = "Đăng ký thành công, kiểm tra email để kích hoạt tài khoản",
                     StatusCode = 201,
                     Data = new { user.TenTK, user.TenHienThi, user.Email, user.Phone },
                 };

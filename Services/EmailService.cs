@@ -67,7 +67,7 @@ namespace MyWebApi.Services
                     return new ResultDTO
                     {
                         Success = true,
-                        Message = "Gửi thành công, hãy nhấp vào email để xác thực email của bạn.",
+                        Message = "Gửi thành công, hãy nhấp vào link để xác thực email của bạn.",
                         Data = null,
                         StatusCode = 200
                     };
