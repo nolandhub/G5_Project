@@ -26,6 +26,10 @@ builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpContextAccessor();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
+
 // Add CORS configuration
 builder.Services.AddCors(options =>
 {
