@@ -15,7 +15,7 @@ export default function Login() {
 
           <p className="mt-4 text-sm text-center text-stone-500">
             Don’t have an account?{" "}
-            <Link href="/signup" target="blank" className="text-red-500 hover:underline font-bold">Sign up to free!</Link>
+            <Link href="/signup" className="text-red-500 hover:underline font-bold">Sign up to free!</Link>
           </p>
         </div>
       </div>

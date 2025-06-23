@@ -1,12 +1,22 @@
-
-
 'use client';
 import { useRouter } from 'next/navigation';
+import axiosClient from '../../services/axiosClient'; // Đường dẫn tùy cấu trúc project
+
+import { toast } from 'react-toastify';
+const handleGetAll = async () => {
+    try {
+        const users = await axiosClient.get('/TaiKhoan/GetAll');
+        console.log(users);
+
+        toast.success(`Đã lấy được thông tin ${users.data.length} người dùng`);
+    } catch (err) {
+        console.error('Lỗi:', err);
+        // toast đã hiển thị trong axiosClient interceptor rồi
+    }
+};
 
 
-
-
-export default function Login() {
+export default function Home() {
     const router = useRouter();
 
     return (
@@ -24,14 +34,13 @@ export default function Login() {
                 </button>
 
                 <button
-                    onClick={() => router.push('/login')}
+                    onClick={handleGetAll}
                     className="w-auto bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition p-2"
                 >
-                    Next →
+                    GetAll →
                 </button>
             </div>
         </div>
-
 
     );
 }

@@ -29,6 +29,7 @@ namespace MyWebApi.Controllers
             _taikhoanrepo = taikhoanrepo;
         }
 
+
         [Authorize(Roles = "1")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
