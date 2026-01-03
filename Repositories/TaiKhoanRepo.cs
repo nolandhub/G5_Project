@@ -45,8 +45,6 @@ namespace MyWebApi.Repositories
 
 
                     };
-
-
                 }
 
 
@@ -167,7 +165,6 @@ namespace MyWebApi.Repositories
                 }
 
                 var TaiKhoanDTO = _mapper.Map<TaiKhoanDTO>(user);
-
 
 
                 return new ResultDTO

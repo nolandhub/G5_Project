@@ -80,7 +80,6 @@ import axiosClient from "./axiosClient";
 //     const json: RegisterResponse = await res.json();
 //     if (!res.ok || !json.success)
 //         throw new Error(json.message || 'Register failed');
-
 // }
 
 
@@ -94,7 +93,6 @@ export const login = async (data: loginRequest) => {
     const res = await axiosClient.post('Auth/Login', data)
     return res
 }
-
 
 export interface RegisterData {
     tenTK: string,

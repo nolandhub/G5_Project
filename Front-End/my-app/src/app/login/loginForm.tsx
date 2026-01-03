@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { loginRequest, login } from '../../services/authServices';
 import { toast } from 'react-toastify';
-
-
+import { jwtDecode } from 'jwt-decode';
+import { ROLE } from '../constants/role';
 
 export default function LoginForm() {
     const router = useRouter();
@@ -14,6 +14,12 @@ export default function LoginForm() {
     const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) =>
         setForm({ ...form, [e.target.name]: e.target.value })   //dynamic key   key-value 
 
+    interface JwtPayload {
+        role: string
+    }
+
+
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
@@ -22,13 +28,38 @@ export default function LoginForm() {
             const res = await login(form);
             localStorage.setItem('token', res.data.token);
             console.log(res);
-            router.push('/home');
 
-            toast.success("Đăng nhập thành công ");
+            const token = localStorage.getItem('token')
+            if (token) {
+                const decoded = jwtDecode<JwtPayload>(token)
+                const role = decoded.role
+
+                switch (role) {
+                    case ROLE.ADMIN:
+                        router.push('/admin/dashboard')
+                        toast.success("Đăng nhập thành công ");
+                        break;
+                    case ROLE.STAFF:
+                        router.push('/staff/dashboard')
+                        toast.success("Đăng nhập thành công ");
+                        break;
+                    case ROLE.USER:
+                        router.push('/user/dashboard')
+                        toast.success("Đăng nhập thành công ");
+                        break;
+                    default:
+                        router.push('/components/unAuth')
+                        toast.error("Đăng nhập thất bại ");
+                        break;
+                }
+
+            }
+
         } catch (err: any) {
             setError(err.message);
         }
     };
+
 
 
     return (

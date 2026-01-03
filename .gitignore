@@ -12,3 +12,5 @@ obj/
 # Ignore file hệ thống
 Thumbs.db
 .DS_Store
+
+.fake

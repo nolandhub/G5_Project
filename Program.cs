@@ -46,6 +46,12 @@ builder.Services.AddCors(options =>
 // ========================
 // SWAGGER CONFIGURATION
 // ========================
+
+if (builder.Environment.IsProduction())
+{
+    builder.WebHost.UseUrls("http://+:80");
+}
+
 builder.Services.AddSwaggerGen(Options =>
 {
     var jwtSecurityScheme = new OpenApiSecurityScheme
@@ -137,25 +143,10 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors("AllowAll");
 
 // Development environment configuration
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Web API v1");
-        c.RoutePrefix = string.Empty;
-    });
-}
-else
-{
-    // In production, always use Swagger
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Web API v1");
-        c.RoutePrefix = string.Empty; // Serve Swagger UI at the root URL
-    });
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 // Security and routing middleware
 app.UseHttpsRedirection();

@@ -72,7 +72,6 @@ namespace MyWebApi.Controllers
     "text/html", System.Text.Encoding.UTF8
 );
 
-
             }
             else
             {
@@ -80,7 +79,5 @@ namespace MyWebApi.Controllers
     "text/html", System.Text.Encoding.UTF8);
             }
         }
-
-
     }
 }

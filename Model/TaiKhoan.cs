@@ -12,10 +12,10 @@ namespace MyWebApi.Model
     {
 
         public int MaTK { get; set; }
-        public string TenTK { get; set; }
-        public string MatKhau { get; set; }
+        public string? TenTK { get; set; }
+        public string? MatKhau { get; set; }
         public string? HinhAnh { get; set; }
-        public string TenHienThi { get; set; }
+        public string? TenHienThi { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public bool? IsVerified { get; set; }
@@ -25,7 +25,7 @@ namespace MyWebApi.Model
 
         // Navigation property
         public int LoaiTK { get; set; }
-        public virtual VaiTro VaiTro { get; set; }
+        public virtual VaiTro? VaiTro { get; set; }
 
     }
 }

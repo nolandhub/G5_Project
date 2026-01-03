@@ -20,8 +20,6 @@ namespace MyWebApi.Data.Config
             builder.Property(tt => tt.TenTT)
             .HasMaxLength(50);
 
-
-
         }
     }
 }

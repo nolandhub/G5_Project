@@ -39,7 +39,7 @@ namespace MyWebApi.Services
             try
             {
                 var user = await _context.TaiKhoans.FirstOrDefaultAsync(c => c.TenTK == log.TenTK);
-                if (user == null || !PasswordHasher.Verify(user.MatKhau, log.MatKhau))
+                if (user == null || !PasswordHasher.Verify(user.MatKhau!, log.MatKhau))
                 {
                     return new ResultDTO
                     {
@@ -75,7 +75,7 @@ namespace MyWebApi.Services
         {
             try
             {
-                var hashPash = PasswordHasher.Hash(regis.MatKhau);
+                var hashPash = PasswordHasher.Hash(regis.MatKhau!);
 
                 var existingAccount = await _context.TaiKhoans
                     .Where(t => t.TenTK == regis.TenTK || t.TenHienThi == regis.TenHienThi)
@@ -117,7 +117,7 @@ namespace MyWebApi.Services
                 var sendInfo = new EmailForm
                 {
                     ToEmail = regis.Email,
-                    ToName = regis.TenHienThi,
+                    ToName = regis.TenHienThi!,
                     Subject = "Xác thực email",
                     PlainText = $"Xin chào {regis.TenHienThi}, vui lòng xác thực tài khoản bằng cách nhấp vào link: {linkVerify}",
                     HtmlContent = $"<p>Xin chào {regis.TenHienThi},</p><p>Vui lòng xác thực tài khoản bằng cách nhấp vào liên kết dưới đây:</p><a href='{linkVerify}'>Xác thực tài khoản</a>",

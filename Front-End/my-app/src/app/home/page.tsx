@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import axiosClient from '../../services/axiosClient'; // Đường dẫn tùy cấu trúc project
+import axiosClient from '../../services/axiosClient';
 
 import { toast } from 'react-toastify';
 const handleGetAll = async () => {
@@ -20,7 +20,6 @@ export default function Home() {
     const router = useRouter();
 
     return (
-
         <div className='justify-items-center space-y-30 bg-yellow-300  h-screen w-screen'>
             <div className=" text-green-500 justify-items-center font-extrabold text-9xl pt-80">
                 Welcome to Home!
@@ -37,7 +36,7 @@ export default function Home() {
                     onClick={handleGetAll}
                     className="w-auto bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition p-2"
                 >
-                    GetAll →
+                    GetAll
                 </button>
             </div>
         </div>
